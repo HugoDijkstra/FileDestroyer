@@ -47,6 +47,21 @@ namespace FileDestroyer
         {
             try
             {
+                if (args.Count() == 1)
+                {
+                    if (File.Exists(args[0]))
+                    {
+                        deleteSecure(new string[] { args[0] });
+                        Console.Write("File deleted");
+                        return;
+                    }
+                    else if(Directory.Exists(args[0]))
+                    {
+                        deleteSecure(DirSearch(args[0]).ToArray());
+                        Console.Write("Directory emptied");
+                        return;
+                    }
+                }
                 for (int i = 0; i < args.Length; i++)
                 {
                     switch (args[i])
